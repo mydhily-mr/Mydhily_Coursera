@@ -37,7 +37,13 @@ void main() {
                                 7,  87, 250, 230,  99,   3, 100,  90};
 
   /* Other Variable Declarations Go Here */
+  unsigned int size = 40;
+
   /* Statistics and Printing Functions Go Here */
+  printf("Original Array:\n");
+  print_array(test, size);
+
+  print_statistics(test, size);
 
 }
 
@@ -54,7 +60,11 @@ void main() {
  * @return void
  */
 void print_statistics(unsigned char *array, unsigned int size){
-
+    printf("\nStatistics:\n");
+    printf("Minimum: %u\n", find_minimum(array, size));
+    printf("Maximum: %u\n", find_maximum(array, size));
+    printf("Mean: %u\n", find_mean(array, size));
+    printf("Median: %u\n", find_median(array, size));
 }
 
 /**
@@ -67,7 +77,10 @@ void print_statistics(unsigned char *array, unsigned int size){
  * 
  */
 void print_array(unsigned char *array, unsigned int size){
-
+  for (unsigned int i = 0; i < size; i++) {
+        printf("%u ", array[i]);
+    }
+    printf("\n");
 }
 
 
@@ -81,7 +94,16 @@ void print_array(unsigned char *array, unsigned int size){
  * @return The median value of the array.
  */
 unsigned char find_median(unsigned char *array, unsigned int size){
-
+  unsigned char sorted_array[size];
+    for (unsigned int i = 0; i < size; i++) {
+        sorted_array[i] = array[i];
+    }
+    sort_array(sorted_array, size);
+    if (size % 2 == 0) {
+        return (sorted_array[size / 2 - 1] + sorted_array[size / 2]) / 2;
+    } else {
+        return sorted_array[size / 2];
+    }
 }
 
 /**
@@ -94,7 +116,11 @@ unsigned char find_median(unsigned char *array, unsigned int size){
  * @return The mean value of the array.
  */
 unsigned char find_mean(unsigned char *array, unsigned int size){
-
+  unsigned int sum = 0;
+    for (unsigned int i = 0; i < size; i++) {
+        sum += array[i];
+    }
+    return (unsigned char)(sum / size);
 }
 
 /**
@@ -107,7 +133,13 @@ unsigned char find_mean(unsigned char *array, unsigned int size){
  * @return The maximum value in the array.
  */
 unsigned char find_maximum(unsigned char *array, unsigned int size){
-
+  unsigned char max = array[0];
+    for (unsigned int i = 1; i < size; i++) {
+        if (array[i] > max) {
+            max = array[i];
+        }
+    }
+    return max;
 }
 
 /**
@@ -120,7 +152,13 @@ unsigned char find_maximum(unsigned char *array, unsigned int size){
  * @return The minimum value in the array.
  */
 unsigned char find_minimum(unsigned char *array, unsigned int size){
-
+  unsigned char min = array[0];
+    for (unsigned int i = 1; i < size; i++) {
+        if (array[i] < min) {
+            min = array[i];
+        }
+    }
+    return min;
 }
 
 /**
@@ -133,6 +171,14 @@ unsigned char find_minimum(unsigned char *array, unsigned int size){
  * @return void
  */
 void sort_array(unsigned char *array, unsigned int size){
-
+  for (unsigned int i = 0; i < size - 1; i++) {
+        for (unsigned int j = 0; j < size - i - 1; j++) {
+            if (array[j] < array[j + 1]) {
+                unsigned char temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+    }
 }
 
