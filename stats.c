@@ -40,8 +40,8 @@ void main() {
   unsigned int size = 40;
 
   /* Statistics and Printing Functions Go Here */
-  printf("Original Array:\n");
-  print_array(test, size);
+//   printf("Original Array:\n");
+//   print_array(test, size);
 
   print_statistics(test, size);
 
@@ -60,11 +60,22 @@ void main() {
  * @return void
  */
 void print_statistics(unsigned char *array, unsigned int size){
+    // Sort and print the sorted array
+    unsigned char sorted_array[size];
+    for (unsigned int i = 0; i < size; i++) {
+        sorted_array[i] = array[i];
+    }
+    sort_array(sorted_array, size);
+
+    printf("\nSorted Array:\n");
+    print_array(sorted_array, size);
     printf("\nStatistics:\n");
     printf("Minimum: %u\n", find_minimum(array, size));
     printf("Maximum: %u\n", find_maximum(array, size));
     printf("Mean: %u\n", find_mean(array, size));
-    printf("Median: %u\n", find_median(array, size));
+    printf("Median: %u\n", find_median(array, size));  
+  
+   
 }
 
 /**
